@@ -1,32 +1,34 @@
-﻿using MongoDB.Driver;
-
-namespace Domain
+﻿namespace Domain
 {
     public sealed class BookService
     {
-        private readonly IMongoCollection<Book> _bookCollection;
-        
-        public BookService(string databaseConnectionString)
+        private readonly IBookRepository _bookRepository;
+
+        public BookService(IBookRepository bookRepository)
         {
-            var mongoClient = new MongoClient(databaseConnectionString);
-            _bookCollection = mongoClient.GetDatabase("Library").GetCollection<Book>(nameof(Book));
+            _bookRepository = bookRepository;
         }
 
         public void AddBook(string bookId)
         {
             var book = new Book()
             {
-                Id = bookId,
+                Name = bookId,
                 IsBorrowed = false,
                 Borrower = null
             };
+
+            if (_bookRepository.FindBy(bookId) != null)
+            {
+                throw new BookAlreadyExistsException(bookId);
+            }
             
-            _bookCollection.InsertOne(book);
+            _bookRepository.Store(book);
         }
         
         public void BorrowBook(string bookId, string userId)
         {
-            var book = _bookCollection.Find(b => b.Id == bookId).FirstOrDefault();
+            var book = _bookRepository.FindBy(bookId);
             if (book == null)
             {
                 throw new BookDoesntExistException(bookId);
@@ -40,7 +42,7 @@ namespace Domain
             book.IsBorrowed = true;
             book.Borrower = userId;
 
-            _bookCollection.ReplaceOne(b => b.Id == bookId, book);
+            _bookRepository.Store(book);
         }
     }
 }

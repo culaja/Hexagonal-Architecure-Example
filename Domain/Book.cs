@@ -1,11 +1,8 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-
-namespace Domain
+﻿namespace Domain
 {
     public sealed class Book
     {
-        [BsonId]
-        public string Id { get; set; }
+        public string Name { get; set; }
         
         public bool IsBorrowed { get; set; }
         

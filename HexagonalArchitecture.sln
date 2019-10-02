@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUi", "ConsoleUi\Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1FC3566A-F222-46BF-BEAE-235678D59495}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDbAdapter", "MongoDbAdapter\MongoDbAdapter.csproj", "{D1BFFA43-70F1-46D3-B9CF-7FD5D1F6F355}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{1A4700DE-E05C-4644-AFB8-5A56BBAF34B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{1FC3566A-F222-46BF-BEAE-235678D59495}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FC3566A-F222-46BF-BEAE-235678D59495}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FC3566A-F222-46BF-BEAE-235678D59495}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1BFFA43-70F1-46D3-B9CF-7FD5D1F6F355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1BFFA43-70F1-46D3-B9CF-7FD5D1F6F355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1BFFA43-70F1-46D3-B9CF-7FD5D1F6F355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1BFFA43-70F1-46D3-B9CF-7FD5D1F6F355}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A4700DE-E05C-4644-AFB8-5A56BBAF34B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A4700DE-E05C-4644-AFB8-5A56BBAF34B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A4700DE-E05C-4644-AFB8-5A56BBAF34B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A4700DE-E05C-4644-AFB8-5A56BBAF34B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -26,9 +26,11 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Book.cs" t="Include" />
         <e p="BookAlreadyBorrowedException.cs" t="Include" />
+        <e p="BookAlreadyExistsException.cs" t="Include" />
         <e p="BookDoesntExistException.cs" t="Include" />
         <e p="BookService.cs" t="Include" />
         <e p="Domain.csproj" t="IncludeRecursive" />
+        <e p="IBookRepository.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netstandard2.0" t="Include">
@@ -38,10 +40,38 @@
         </e>
       </e>
       <e p="HexagonalArchitecture.sln" t="IncludeFlat" />
+      <e p="IntegrationTests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="IntegrationTests.csproj" t="IncludeRecursive" />
+        <e p="MongoDbBookRepositoryTests.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.2" t="Include">
+              <e p="IntegrationTests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="MongoDbAdapter" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="BookDto.cs" t="Include" />
+        <e p="BookExtensions.cs" t="Include" />
+        <e p="MongoDbAdapter.csproj" t="IncludeRecursive" />
+        <e p="MongoDbBookRepository.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="MongoDbAdapter.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="packages" t="ExcludeRecursive" />
       <e p="Tests" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="BookServiceTests.cs" t="Include" />
+        <e p="InMemoryBookRepository.cs" t="Include" />
+        <e p="MongoDbBookRepositoryTests.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp2.2" t="Include">

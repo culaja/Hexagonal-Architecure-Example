@@ -1,31 +1,19 @@
-using System;
 using Domain;
 using FluentAssertions;
-using Mongo2Go;
-using MongoDB.Driver;
 using Xunit;
 
 namespace Tests
 {
-    public class BookServiceTests : IDisposable
+    public class BookServiceTests
     {
-        private readonly MongoDbRunner _mongoDbRunner = MongoDbRunner.Start();
+        private readonly IBookRepository _bookRepository = new InMemoryBookRepository();
         private readonly BookService _bookService;
-        private readonly IMongoCollection<Book> _bookCollection;
 
         public BookServiceTests()
         {
-            _bookService = new BookService(_mongoDbRunner.ConnectionString);
-            _bookCollection = new MongoClient(_mongoDbRunner.ConnectionString)
-                .GetDatabase("Library")
-                .GetCollection<Book>(nameof(Book));
+            _bookService = new BookService(_bookRepository);
         }
-        
-        public void Dispose()
-        {
-            _mongoDbRunner?.Dispose();
-        }
-        
+
         [Fact]
         public void book_doesnt_exist_exception_thrown_when_borrowing_unknown_book()
         {
@@ -40,17 +28,18 @@ namespace Tests
         [Fact]
         public void book_can_be_borrowed_to_user_if_exists_and_if_is_not_borrowed()
         {
-            _bookService.AddBook("War and Peace");
+           _bookService.AddBook("War and Peace");
             
             _bookService.BorrowBook("War and Peace", "John Doe");
             
-            _bookCollection.Find(b => b.Id == "War and Peace").FirstOrDefault()
-                .Should().BeEquivalentTo(new Book()
-                {
-                    Id = "War and Peace",
-                    IsBorrowed = true,
-                    Borrower = "John Doe"
-                });
+           _bookRepository.FindBy("War and Peace")
+               .Should().BeEquivalentTo(new Book
+               {
+                   Name = "War and Peace",
+                   IsBorrowed = true,
+                   Borrower = "John Doe"
+               });
+           
         }
 
         [Fact]
