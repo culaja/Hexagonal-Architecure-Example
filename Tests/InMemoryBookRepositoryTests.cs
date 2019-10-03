@@ -49,7 +49,7 @@ namespace Tests
             
             _bookRepository.Transform(
                 "War and Peace",
-                book => book.BorrowTo("John Doe"));
+                book => WarAndPeaceBorrowedToJohnDoe);
 
             _bookRepository.FindBy("War and Peace")
                 .Should().BeEquivalentTo(WarAndPeaceBorrowedToJohnDoe);

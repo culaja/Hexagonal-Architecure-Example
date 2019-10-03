@@ -1,5 +1,9 @@
-﻿namespace Domain
+﻿using System;
+
+namespace Domain
 {
+    public delegate bool UserBlacklistProviderByUserName(string userName);
+    
     public sealed class Book
     {
         // this should be private, but because of mapping with db object we need to expose it
@@ -15,11 +19,18 @@
             false,
             null);
 
-        public Book BorrowTo(string user)
+        public Book BorrowTo(
+            string user,
+            UserBlacklistProviderByUserName provider)
         {
             if (IsBorrowed)
             {
                 throw new BookAlreadyBorrowedException(this);
+            }
+            
+            if (provider(user))
+            {
+                throw new UserBlacklistedException(user);
             }
             
             IsBorrowed = true;

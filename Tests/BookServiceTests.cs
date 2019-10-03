@@ -1,17 +1,19 @@
 using Domain;
 using FluentAssertions;
 using Xunit;
+using static Tests.TestValues;
 
 namespace Tests
 {
     public class BookServiceTests
     {
         private readonly IBookRepository _bookRepository = new InMemoryBookRepository();
+        private readonly IUserBlackListProvider _userBlackListProvider = new StubUserBlackListProvider();
         private readonly BookService _bookService;
 
         public BookServiceTests()
         {
-            _bookService = new BookService(_bookRepository);
+            _bookService = new BookService(_bookRepository, _userBlackListProvider);
         }
 
         [Fact]
@@ -38,7 +40,7 @@ namespace Tests
         }
 
         [Fact]
-        public void book_cant_be_borrower_if_already_borrower()
+        public void book_cant_be_borrower_if_already_borrowed()
         {
             _bookService.AddBook("War and Peace");
             _bookService.BorrowBook("War and Peace", "John Doe");
@@ -47,6 +49,15 @@ namespace Tests
                 .Should()
                 .Throw<BookAlreadyBorrowedException>()
                 .WithMessage($"Book 'War and Peace' is already borrowed to 'John Doe'.");
+        }
+
+        [Fact]
+        public void book_cant_be_borrower_if_user_is_blacklisted()
+        {
+            _bookService.AddBook("War and Peace");
+            
+            _bookService.Invoking(s => s.BorrowBook("War and Peace", BlacklistedUser))
+                .Should().Throw<UserBlacklistedException>();
         }
     }
 }

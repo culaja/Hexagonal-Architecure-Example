@@ -31,7 +31,7 @@ namespace Tests
                 throw new BookDoesntExistException(bookName);
             }
 
-            bookTransformer(book);
+            _bookById[bookName] = bookTransformer(book);
         }
     }
 }

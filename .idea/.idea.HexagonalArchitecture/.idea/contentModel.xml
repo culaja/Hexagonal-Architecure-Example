@@ -31,6 +31,7 @@
         <e p="BookService.cs" t="Include" />
         <e p="Domain.csproj" t="IncludeRecursive" />
         <e p="IBookRepository.cs" t="Include" />
+        <e p="IUserBlackListProvider.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netstandard2.0" t="Include">
@@ -38,6 +39,7 @@
             </e>
           </e>
         </e>
+        <e p="UserBlacklistedException.cs" t="Include" />
       </e>
       <e p="HexagonalArchitecture.sln" t="IncludeFlat" />
       <e p="IntegrationTests" t="IncludeRecursive">
@@ -79,6 +81,7 @@
             </e>
           </e>
         </e>
+        <e p="StubUserBlackListProvider.cs" t="Include" />
         <e p="Tests.csproj" t="IncludeRecursive" />
         <e p="TestValues.cs" t="Include" />
       </e>
