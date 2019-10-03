@@ -12,11 +12,9 @@ namespace MongoDbAdapter
         
         public string Borrower { get; set; }
 
-        public Book ToDomainObject() => new Book
-        {
-            Name = Name,
-            IsBorrowed = IsBorrowed,
-            Borrower = Borrower
-        };
+        public Book ToDomainObject() => new Book(
+            Name,
+            IsBorrowed,
+            Borrower);
     }
 }

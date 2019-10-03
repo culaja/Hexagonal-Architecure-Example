@@ -11,19 +11,12 @@
 
         public void AddBook(string bookId)
         {
-            var book = new Book()
-            {
-                Name = bookId,
-                IsBorrowed = false,
-                Borrower = null
-            };
-
             if (_bookRepository.FindBy(bookId) != null)
             {
                 throw new BookAlreadyExistsException(bookId);
             }
-            
-            _bookRepository.Store(book);
+
+            _bookRepository.Store(Book.NewOf(bookId));
         }
         
         public void BorrowBook(string bookId, string userId)
@@ -33,14 +26,8 @@
             {
                 throw new BookDoesntExistException(bookId);
             }
-
-            if (book.IsBorrowed)
-            {
-                throw new BookAlreadyBorrowedException(book);
-            }
-
-            book.IsBorrowed = true;
-            book.Borrower = userId;
+            
+            book.BorrowTo(userId);
 
             _bookRepository.Store(book);
         }

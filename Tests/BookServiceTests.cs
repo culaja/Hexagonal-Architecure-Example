@@ -32,14 +32,9 @@ namespace Tests
             
             _bookService.BorrowBook("War and Peace", "John Doe");
             
-           _bookRepository.FindBy("War and Peace")
-               .Should().BeEquivalentTo(new Book
-               {
-                   Name = "War and Peace",
-                   IsBorrowed = true,
-                   Borrower = "John Doe"
-               });
-           
+            var book = _bookRepository.FindBy("War and Peace");
+            book.IsBorrowed.Should().BeTrue();
+            book.Borrower.Should().Be("John Doe");
         }
 
         [Fact]

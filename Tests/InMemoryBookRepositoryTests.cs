@@ -1,6 +1,7 @@
 using Domain;
 using FluentAssertions;
 using Xunit;
+using static Tests.TestValues;
 
 namespace Tests
 {
@@ -18,46 +19,21 @@ namespace Tests
         [Fact]
         public void returns_exact_object_if_exists()
         {
-            _bookRepository.Store(new Book
-            {
-                Name = "War and Peace",
-                IsBorrowed = true,
-                Borrower = "John Doe"
-            });
-            
+            _bookRepository.Store(TestValues.WarAndPeaceBorrowedToJohnDoe);
+
             _bookRepository.FindBy("War and Peace")
-                .Should().BeEquivalentTo(new Book
-                {
-                    Name = "War and Peace",
-                    IsBorrowed = true,
-                    Borrower = "John Doe"
-                });
+                .Should().BeEquivalentTo(WarAndPeaceBorrowedToJohnDoe);
         }
 
         [Fact]
         public void returns_latest_stored_object()
         {
-            _bookRepository.Store(new Book
-            {
-                Name = "War and Peace",
-                IsBorrowed = true,
-                Borrower = "John Doe"
-            });
+            _bookRepository.Store(WarAndPeaceBorrowedToJohnDoe);
             
-            _bookRepository.Store(new Book
-            {
-                Name = "War and Peace",
-                IsBorrowed = false,
-                Borrower = null
-            });
+            _bookRepository.Store(UnborrowedWarAndPeace);
             
             _bookRepository.FindBy("War and Peace")
-                .Should().BeEquivalentTo(new Book
-                {
-                    Name = "War and Peace",
-                    IsBorrowed = false,
-                    Borrower = null
-                });
+                .Should().BeEquivalentTo(UnborrowedWarAndPeace);
         }
     }
 }
