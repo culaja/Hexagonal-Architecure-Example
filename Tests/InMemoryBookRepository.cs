@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Domain;
 
 namespace Tests
@@ -23,9 +24,14 @@ namespace Tests
             return book;
         }
 
-        public void Store(Book book)
+        public void Transform(string bookName, Func<Book, Book> bookTransformer)
         {
-            _bookById[book.Name] = book;
+            if (!_bookById.TryGetValue(bookName, out var book))
+            {
+                throw new BookDoesntExistException(bookName);
+            }
+
+            bookTransformer(book);
         }
     }
 }

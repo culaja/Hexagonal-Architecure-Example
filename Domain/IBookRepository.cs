@@ -1,4 +1,6 @@
-﻿namespace Domain
+﻿using System;
+
+namespace Domain
 {
     public interface IBookRepository
     {
@@ -6,6 +8,6 @@
         
         Book FindBy(string bookId);
 
-        void Store(Book book);
+        void Transform(string bookName, Func<Book, Book> bookTransformer);
     }
 }

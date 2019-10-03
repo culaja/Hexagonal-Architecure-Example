@@ -20,7 +20,7 @@ namespace MongoDbAdapter
             {
                 _bookCollection.InsertOne(book.ToDto());
             }
-            catch (MongoWriteException e)
+            catch (MongoWriteException)
             {
                 throw new BookAlreadyExistsException(book.Name);
             }
@@ -30,12 +30,23 @@ namespace MongoDbAdapter
             _bookCollection.Find(b => b.Name == bookId).FirstOrDefault()
                 ?.ToDomainObject();
 
-        public void Store(Book book)
+        private void Store(Book book)
         {
             _bookCollection.ReplaceOne(
                 b => b.Name == book.Name, 
                 book.ToDto(),
                 new UpdateOptions { IsUpsert = true });
+        }
+
+        public void Transform(string bookName, Func<Book, Book> bookTransformer)
+        {
+            var book = FindBy(bookName);
+            if (book == null)
+            {
+                throw new BookDoesntExistException(bookName);
+            }
+            
+            Store(bookTransformer(book));
         }
     }
 }

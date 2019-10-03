@@ -10,19 +10,13 @@
         }
 
         public void AddBook(string bookId) => 
-            _bookRepository.Store(Book.NewOf(bookId));
+            _bookRepository.Insert(Book.NewOf(bookId));
 
         public void BorrowBook(string bookId, string userId)
         {
-            var book = _bookRepository.FindBy(bookId);
-            if (book == null)
-            {
-                throw new BookDoesntExistException(bookId);
-            }
-            
-            book.BorrowTo(userId);
-
-            _bookRepository.Store(book);
+            _bookRepository.Transform(
+                bookId,
+                book => book.BorrowTo(userId));
         }
     }
 }
