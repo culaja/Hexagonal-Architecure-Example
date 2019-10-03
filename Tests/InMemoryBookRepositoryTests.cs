@@ -35,5 +35,24 @@ namespace Tests
             _bookRepository.FindBy("War and Peace")
                 .Should().BeEquivalentTo(UnborrowedWarAndPeace);
         }
+
+        [Fact]
+        public void adds_new_book_if_book_is_not_in_the_repository()
+        {
+            _bookRepository.Insert(UnborrowedWarAndPeace);
+            
+            _bookRepository.FindBy("War and Peace")
+                .Should().BeEquivalentTo(UnborrowedWarAndPeace);
+        }
+
+        [Fact]
+        public void throws_book_already_exists_exception()
+        {
+            _bookRepository.Insert(UnborrowedWarAndPeace);
+            
+            _bookRepository.Invoking(br => br.Insert(UnborrowedWarAndPeace))
+                .Should().Throw<BookAlreadyExistsException>()
+                .WithMessage($"Book 'War and Peace' already exists.");
+        }
     }
 }

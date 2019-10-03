@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using System;
+using Domain;
 using MongoDB.Driver;
 
 namespace MongoDbAdapter
@@ -12,7 +13,19 @@ namespace MongoDbAdapter
             var mongoClient = new MongoClient(databaseConnectionString);
             _bookCollection = mongoClient.GetDatabase("Library").GetCollection<BookDto>(nameof(Book));
         }
-        
+
+        public void Insert(Book book)
+        {
+            try
+            {
+                _bookCollection.InsertOne(book.ToDto());
+            }
+            catch (MongoWriteException e)
+            {
+                throw new BookAlreadyExistsException(book.Name);
+            }
+        }
+
         public Book FindBy(string bookId) => 
             _bookCollection.Find(b => b.Name == bookId).FirstOrDefault()
                 ?.ToDomainObject();

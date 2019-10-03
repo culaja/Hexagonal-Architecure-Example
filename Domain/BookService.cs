@@ -9,16 +9,9 @@
             _bookRepository = bookRepository;
         }
 
-        public void AddBook(string bookId)
-        {
-            if (_bookRepository.FindBy(bookId) != null)
-            {
-                throw new BookAlreadyExistsException(bookId);
-            }
-
+        public void AddBook(string bookId) => 
             _bookRepository.Store(Book.NewOf(bookId));
-        }
-        
+
         public void BorrowBook(string bookId, string userId)
         {
             var book = _bookRepository.FindBy(bookId);
