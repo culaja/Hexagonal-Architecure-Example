@@ -1,6 +1,7 @@
 ﻿using System;
+using Domain;
 
-namespace Domain
+namespace Ports
 {
     public interface IBookRepository
     {

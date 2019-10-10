@@ -1,6 +1,7 @@
 ﻿using System;
 using Domain;
 using MongoDB.Driver;
+using Ports;
 
 namespace MongoDbAdapter
 {

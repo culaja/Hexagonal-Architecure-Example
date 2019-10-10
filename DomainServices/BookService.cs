@@ -1,4 +1,7 @@
-﻿namespace Domain
+﻿using Domain;
+using Ports;
+
+namespace DomainServices
 {
     public sealed class BookService
     {

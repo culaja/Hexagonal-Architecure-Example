@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DomainServices\DomainServices.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\MongoDbAdapter\MongoDbAdapter.csproj" />
       <ProjectReference Include="..\Tests\Tests.csproj" />
