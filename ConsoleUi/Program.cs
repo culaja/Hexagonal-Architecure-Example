@@ -1,6 +1,5 @@
-﻿using Domain;
+﻿using ApplicationWireUp;
 using DomainServices;
-using MongoDbAdapter;
 
 namespace ConsoleUi
 {
@@ -8,13 +7,10 @@ namespace ConsoleUi
     {
         static void Main()
         {
-            var bookService = new BookService(
-                new MongoDbBookRepository(
-                    "mongodb://localhost:27017/"),
-                new NoBlacklistedUsersProvider());
+            var applicationContainer = ApplicationContainer.BuildUsing("mongodb://localhost:27017/");
             
-            bookService.AddBook("War and Peace");
-            bookService.BorrowBook("War and Peace", "John Doe");
+            applicationContainer.Execute(new AddBookCommand("War and Peace"));
+            applicationContainer.Execute(new BorrowBookCommand("War and Peace", "John Doe"));
         }
     }
 }

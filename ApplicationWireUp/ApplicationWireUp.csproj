@@ -5,8 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DomainServices\DomainServices.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+      <ProjectReference Include="..\MongoDbAdapter\MongoDbAdapter.csproj" />
       <ProjectReference Include="..\Ports\Ports.csproj" />
     </ItemGroup>
 
