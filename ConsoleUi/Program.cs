@@ -3,7 +3,7 @@ using DomainServices;
 
 namespace ConsoleUi
 {
-    class Program
+    internal class Program
     {
         static void Main()
         {
