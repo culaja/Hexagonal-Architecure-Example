@@ -1,4 +1,4 @@
-﻿namespace Domain
+﻿namespace Ports
 {
     public interface IUserBlackListProvider
     {

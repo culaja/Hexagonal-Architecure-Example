@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain
+namespace Ports
 {
     public sealed class BookDoesntExistException : Exception
     {

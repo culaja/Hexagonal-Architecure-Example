@@ -1,5 +1,4 @@
-﻿using ConsoleUi;
-using DomainServices;
+﻿using DomainServices;
 using Infrastructure;
 using MongoDbAdapter;
 

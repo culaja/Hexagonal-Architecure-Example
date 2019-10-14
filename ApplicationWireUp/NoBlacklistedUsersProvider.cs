@@ -1,6 +1,6 @@
-﻿using Domain;
+﻿using Ports;
 
-namespace ConsoleUi
+namespace ApplicationWireUp
 {
     internal sealed class NoBlacklistedUsersProvider : IUserBlackListProvider
     {
